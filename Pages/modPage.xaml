@@ -1,0 +1,31 @@
+﻿<Page x:Class="Synthesis.modPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Synthesis"
+      mc:Ignorable="d" 
+      d:DesignHeight="330" d:DesignWidth="556"
+      Title="modPage">
+
+    <Grid x:Name="modGrid" Margin="10,10,10,10">
+        <Label Content="What type of mod is this?" FontFamily="MS PGothic" FontSize="24" Margin="10,10,10,250"/>
+        <Button Content="ACCESSORIES" HorizontalAlignment="Left" Margin="91,177,0,0" VerticalAlignment="Top" Width="75" Click="modSelect"/>
+        <Button Content="hair" HorizontalAlignment="Left" Margin="166,177,0,0" VerticalAlignment="Top" Width="75" Click="modSelect"/>
+        <Button Content="Mixed" HorizontalAlignment="Left" Margin="15,85,0,0" VerticalAlignment="Top" Width="75" Click="modSelect"/>
+        <Button Content="bdsm" HorizontalAlignment="Left" Margin="16,177,0,0" VerticalAlignment="Top" Width="75" Click="modSelect"/>
+        <Button Content="piercing" HorizontalAlignment="Left" Margin="16,204,0,0" VerticalAlignment="Top" Width="74" Click="modSelect"/>
+        <Button Content="body" HorizontalAlignment="Left" Margin="165,58,0,0" VerticalAlignment="Top" Width="76" Click="modSelect"/>
+        <Button Content="swimsuit" HorizontalAlignment="Left" Margin="91,204,0,0" VerticalAlignment="Top" Width="74" Click="modSelect"/>
+        <Button Content="animation" HorizontalAlignment="Left" Margin="166,204,0,0" VerticalAlignment="Top" Width="76" Click="modSelect"/>
+        <Separator HorizontalAlignment="Left" Height="5" Margin="15,53,0,0" VerticalAlignment="Top" Width="422" Background="White" Foreground="White"/>
+        <Button Content="head" HorizontalAlignment="Left" Margin="90,58,0,0" VerticalAlignment="Top" Width="75" Click="modSelect"/>
+        <Button Content="hands" HorizontalAlignment="Left" Margin="317,58,0,0" VerticalAlignment="Top" Width="76" Click="modSelect"/>
+        <Button Content="legs" HorizontalAlignment="Left" Margin="241,58,0,0" VerticalAlignment="Top" Width="76" Click="modSelect"/>
+        <Button Content="shoes" HorizontalAlignment="Left" Margin="393,58,0,0" VerticalAlignment="Top" Width="75" Click="modSelect"/>
+        <Button Content="extras" HorizontalAlignment="Left" Margin="15,112,0,0" VerticalAlignment="Top" Width="75" Click="extras"/>
+        <Button Content="options" HorizontalAlignment="Left" Margin="15,139,0,0" VerticalAlignment="Top" Width="76" Click="modSelect"/>
+        <Button Content="presets" HorizontalAlignment="Left" Margin="15,58,0,0" VerticalAlignment="Top" Width="75" Click="modSelect"/>
+        <Separator HorizontalAlignment="Left" Height="5" Margin="15,172,0,0" VerticalAlignment="Top" Width="422" Background="White" Foreground="White"/>
+    </Grid>
+</Page>

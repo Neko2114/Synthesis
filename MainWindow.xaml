@@ -1,0 +1,89 @@
+﻿<mah:MetroWindow x:Class="Synthesis.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Synthesis"
+        mc:Ignorable="d"
+        Title="Synthesis" Height="491" Width="800" ResizeMode="NoResize" MouseDown="Window_MouseDown" Loaded="MetroWindow_Loaded">
+
+    <Grid>
+        <Grid x:Name="expansionControls" Margin="182,39,0,393" Visibility="Hidden">
+            <Button Content="expand" HorizontalAlignment="Left" VerticalAlignment="Center" Width="73" Height="25" FontFamily="Bahnschrift Light Condensed" FontSize="12" Click="expansionControls_expandClick"/>
+            <Button Content="collapse" HorizontalAlignment="Left" VerticalAlignment="Center" Width="73" Height="25" FontFamily="Bahnschrift Light Condensed" FontSize="12" Margin="73,0,0,0" Click="expansionControls_collapseClick"/>
+            <Button x:Name="finish" Content="finish" HorizontalAlignment="Left" Height="10" Margin="500,0,0,0" VerticalAlignment="Center" Width="114" Click="finishBtn"/>
+        </Grid>
+        <Grid x:Name="expansionGrid" Margin="187,68,0,10">
+            <mah:TransitioningContentControl x:Name="taggerTransition" Transition="Left">
+            </mah:TransitioningContentControl>
+        </Grid>
+        <TabControl HorizontalAlignment="Left" Height="408" VerticalAlignment="Top" Width="600" Margin="182,42,0,0" Visibility="Hidden">
+            <TabItem Header="Tagger" PreviewMouseLeftButtonDown="TabItem_MouseDown">
+            </TabItem>
+            <TabItem x:Name="collectionsTab" Header="Collections" PreviewMouseLeftButtonDown="collectionsTab_MouseLeftButtonDown" IsEnabled="False">
+                <Grid Margin="-168,55,12,-10">
+                    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                        <Grid x:Name="collectionsGrid"/>
+                    </ScrollViewer>
+                    <ComboBox x:Name="authorComboList" Margin="190,-50,190,340" FontFamily="Arial" SelectedIndex="0" SelectionChanged="Collections_AuthorSelection_Changed">
+                        <ComboBoxItem Content="Author"/>
+                    </ComboBox>
+                    <TextBox TextWrapping="Wrap" Text="Search..." Margin="0,-50,570,340"/>
+                    <ComboBox x:Name="sortComboList" Margin="570,-50,0,340" FontFamily="Arial" SelectedIndex="0" SelectionChanged="Collections_SortBySelection_Changed">
+                        <ComboBoxItem Content="Sort By"/>
+                        <ComboBoxItem Content="Obtained"/>
+                        <ComboBoxItem Content="Not Obtained"/>
+                    </ComboBox>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Separator HorizontalAlignment="Center" Height="27" Margin="0,24,0,0" VerticalAlignment="Top" Width="800" d:IsLocked="True"/>
+        <Label x:Name="fileExplorerLabel" Content="     File Explorer" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="124" FontFamily="Arial" Margin="31,39,0,0" d:IsLocked="True"/>
+        <ListBox x:Name="explorerList" HorizontalAlignment="Left" Height="365" Margin="1,63,0,0" VerticalAlignment="Top" Width="181" ItemsSource="{Binding allItems}" DisplayMemberPath="objectName" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Loaded="explorerList_Loaded" MouseDoubleClick="explorerList_MouseDoubleClick" MouseRightButtonUp="explorerList_MouseRightClick">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="ToolTip" Value="{Binding objectName}"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+        <TextBox x:Name="searchBox" HorizontalAlignment="Left" Height="24" Margin="1,428,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" LostKeyboardFocus="searchBox_LostKeyboardFocus" KeyDown="searchBox_KeyDown" IsEnabled="False"/>
+        <Menu x:Name="mainMenu" HorizontalAlignment="Left" Height="37" Margin="0,0,0,0" VerticalAlignment="Top" Width="800" IsEnabled="False">
+            <Menu.ItemContainerStyle>
+                <Style/>
+            </Menu.ItemContainerStyle>
+            <MenuItem x:Name="optionsBtn" HorizontalContentAlignment="Center" ToolTip="File">
+                <MenuItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <AccessText FontSize="24" VerticalAlignment="Center" Text="File" IsEnabled="False"/>
+                    </StackPanel>
+                </MenuItem.Header>
+                <MenuItem x:Name="saveAll" IsEnabled="true" Header="Save" Click="save_Click"/>
+                <MenuItem x:Name="openSortListFolder" Header="Open Sort List Folder" Click="openSortFolder_Click"/>
+                <MenuItem x:Name="repeatPreviousTags" IsEnabled="false" Header="Repeat Previous Tags" Click="repeatPreviousTags_Click"/>
+                <MenuItem x:Name="refreshTags" IsEnabled="true" Header="Refresh Tag Data" Click="refresh_TagsClick"/>
+                <MenuItem x:Name="setupPrimarySymbol" Header="Set Primary Symbol..." Click="primarySymbol_Click"/>
+                <MenuItem x:Name="setupNewModFolder" Header="Set New Mod Folder..." Click="newFolder_Click"/>
+                <MenuItem x:Name="expanderShow" Header="Show Expanders" Click="expander_Click"/>
+            </MenuItem>
+            <MenuItem x:Name="editBtn" HorizontalContentAlignment="Center" ToolTip="Edit">
+                <MenuItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <AccessText FontSize="24" VerticalAlignment="Center" Text="Edit" IsEnabled="False"/>
+                    </StackPanel>
+                </MenuItem.Header>
+                <MenuItem x:Name="modProperties" Header="Mod Information" PreviewMouseDown="ModPropertiesBtn_Click" IsEnabled="False"/>
+            </MenuItem>
+            <MenuItem x:Name="viewBtn" HorizontalContentAlignment="Center" ToolTip="View" SubmenuClosed="ViewMissingTagCheck_SubmenuClosed" FontFamily="MS UI Gothic">
+                <MenuItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <AccessText FontSize="24" VerticalAlignment="Center" IsEnabled="False">Sort</AccessText>
+                    </StackPanel>
+                </MenuItem.Header>
+                <MenuItem x:Name="SortByMissing" IsCheckable="True" Header="Sort by Missing Tags" PreviewMouseDown="MenuButton_MouseDown"/>
+                <MenuItem x:Name="SortByUnassigned" IsCheckable="True" Header="Sort by Unassigned" PreviewMouseDown="MenuButton_MouseDown"/>
+            </MenuItem>
+        </Menu>
+        <mah:ProgressRing x:Name="progressLoad" HorizontalAlignment="Left" Height="88" Margin="44,0,0,0" Width="96" Visibility="Hidden"/>
+    </Grid>
+</mah:MetroWindow>
